@@ -1,7 +1,6 @@
 <template>
     <div id="loader">
         <div class="spinner-border text-white" role="status">
-            <span>Caricamento...</span>
         </div>
     </div>
 

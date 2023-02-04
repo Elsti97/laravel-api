@@ -4,7 +4,9 @@
       <Loader v-if="isLoading" />
       <ul class="mx-auto justify-content-center" v-else-if="posts.length">
         <li v-for="elem in posts" :key="elem.id">
-          {{ elem.title }}
+          <router-link :to="`/posts/${elem.id}`">
+            {{ elem.title }}
+          </router-link>
           <span v-if="elem.category">
             {{ elem.category.name }}
           </span>
@@ -16,7 +18,6 @@
       <p v-else>No post, sorry :(</p>
     </div>
 
-    <!-- Paginazione -->
     <Pagination
       class="d-flex justify-content-center"
       @on-page-change="getPosts"
@@ -52,13 +53,7 @@ export default {
         .get("http://localhost:8000/api/posts?page=" + page)
         .then((res) => {
           console.log(res.data);
-          //this.posts = res.data.data
 
-          // const data = res.data.data;
-          // const current_page = res.data.current_page;
-          // const last_page = res.data.last_page;
-
-          //destrutturizzazione
           const { data, current_page, last_page } = res.data;
 
           this.posts = data;
